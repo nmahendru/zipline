@@ -1,8 +1,11 @@
 name: release
 
 on:
+  pull_request: {}
   push:
-    tags:
+    branches:
+      - '**'
+    tags-ignore:
       - '**'
 
 env:
