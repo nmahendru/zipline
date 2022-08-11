@@ -1,11 +1,11 @@
 import com.android.build.gradle.BaseExtension
-import com.diffplug.gradle.spotless.SpotlessExtension
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
+import org.jmailen.gradle.kotlinter.KotlinterExtension
 
 buildscript {
   repositories {
@@ -27,24 +27,10 @@ buildscript {
 
 plugins {
   id("com.github.gmazzo.buildconfig") version "2.1.0" apply false
-  alias(libs.plugins.spotless)
+  alias(libs.plugins.kotlinter) apply false
 }
 
 apply(plugin = "com.vanniktech.maven.publish.base")
-
-configure<SpotlessExtension> {
-  kotlin {
-    target("**/*.kt")
-    ktlint()
-      .editorConfigOverride(
-        mapOf(
-          "indent_size" to "2",
-          "disabled_rules" to "filename, no-unused-imports, indent, comment-spacing",
-          "ij_kotlin_imports_layout" to "*",
-        )
-      )
-  }
-}
 
 allprojects {
   group = "app.cash.zipline"
@@ -53,6 +39,17 @@ allprojects {
   repositories {
     mavenCentral()
     google()
+  }
+
+  apply(plugin = "org.jmailen.kotlinter")
+
+  configure<KotlinterExtension> {
+    disabledRules = arrayOf(
+      "filename",
+      "no-unused-imports",
+      "indent",
+      "comment-spacing",
+    )
   }
 }
 
