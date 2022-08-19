@@ -77,7 +77,8 @@ class ZiplineLoaderTest {
       """
       |alpha loaded
       |bravo loaded
-      |""".trimMargin()
+      |
+""".trimMargin()
     )
     zipline.close()
   }
@@ -95,7 +96,8 @@ class ZiplineLoaderTest {
       """
       |alpha loaded
       |bravo loaded
-      |""".trimMargin()
+      |
+""".trimMargin()
     )
     zipline.close()
   }
@@ -114,7 +116,8 @@ class ZiplineLoaderTest {
       """
       |alpha loaded
       |bravo loaded
-      |""".trimMargin()
+      |
+""".trimMargin()
     )
     ziplineColdCache.close()
 
@@ -129,7 +132,8 @@ class ZiplineLoaderTest {
       """
       |alpha loaded
       |bravo loaded
-      |""".trimMargin()
+      |
+""".trimMargin()
     )
     ziplineWarmedCache.close()
   }
@@ -156,7 +160,8 @@ class ZiplineLoaderTest {
       """
       |alpha loaded
       |bravo loaded
-      |""".trimMargin()
+      |
+""".trimMargin()
     )
     zipline.close()
   }
@@ -181,15 +186,18 @@ class ZiplineLoaderTest {
       testFixtures.manifest,
       downloadFileSystem.read(downloadDir / getApplicationManifestFileName("test")) {
         readByteString()
-      })
+      }
+    )
     assertTrue(downloadFileSystem.exists(downloadDir / testFixtures.alphaSha256Hex))
     assertEquals(
       testFixtures.alphaByteString,
-      downloadFileSystem.read(downloadDir / testFixtures.alphaSha256Hex) { readByteString() })
+      downloadFileSystem.read(downloadDir / testFixtures.alphaSha256Hex) { readByteString() }
+    )
     assertTrue(downloadFileSystem.exists(downloadDir / testFixtures.bravoSha256Hex))
     assertEquals(
       testFixtures.bravoByteString,
-      downloadFileSystem.read(downloadDir / testFixtures.bravoSha256Hex) { readByteString() })
+      downloadFileSystem.read(downloadDir / testFixtures.bravoSha256Hex) { readByteString() }
+    )
 
     // Load into Zipline.
     val zipline = loader.loadOrFail("test", testFixtures.manifest)
@@ -198,7 +206,8 @@ class ZiplineLoaderTest {
       """
       |alpha loaded
       |bravo loaded
-      |""".trimMargin()
+      |
+""".trimMargin()
     )
     zipline.close()
   }
@@ -223,15 +232,18 @@ class ZiplineLoaderTest {
     assertTrue(fileSystem.exists(downloadDir / getApplicationManifestFileName("test")))
     assertDownloadedToEmbeddedManifest(
       testFixtures.manifest,
-      fileSystem.read(downloadDir / getApplicationManifestFileName("test")) { readByteString() })
+      fileSystem.read(downloadDir / getApplicationManifestFileName("test")) { readByteString() }
+    )
     assertTrue(fileSystem.exists(downloadDir / testFixtures.alphaSha256Hex))
     assertEquals(
       testFixtures.alphaByteString,
-      fileSystem.read(downloadDir / testFixtures.alphaSha256Hex) { readByteString() })
+      fileSystem.read(downloadDir / testFixtures.alphaSha256Hex) { readByteString() }
+    )
     assertTrue(fileSystem.exists(downloadDir / testFixtures.bravoSha256Hex))
     assertEquals(
       testFixtures.bravoByteString,
-      fileSystem.read(downloadDir / testFixtures.bravoSha256Hex) { readByteString() })
+      fileSystem.read(downloadDir / testFixtures.bravoSha256Hex) { readByteString() }
+    )
   }
 
   @Test
@@ -264,17 +276,23 @@ class ZiplineLoaderTest {
     ).test {
       assertEquals(
         "apple",
-        (awaitItem().zipline.quickJs.evaluate(
-          "globalThis.log", "assert.js"
-        ) as String).removeSuffix(
+        (
+          awaitItem().zipline.quickJs.evaluate(
+          "globalThis.log",
+            "assert.js"
+        ) as String
+        ).removeSuffix(
           " loaded\n"
         )
       )
       assertEquals(
         "firetruck",
-        (awaitItem().zipline.quickJs.evaluate(
-          "globalThis.log", "assert.js"
-        ) as String).removeSuffix(
+        (
+          awaitItem().zipline.quickJs.evaluate(
+          "globalThis.log",
+            "assert.js"
+        ) as String
+        ).removeSuffix(
           " loaded\n"
         )
       )

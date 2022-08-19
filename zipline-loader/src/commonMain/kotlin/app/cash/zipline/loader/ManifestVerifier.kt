@@ -73,6 +73,6 @@ class ManifestVerifier private constructor(
       trustedKeys[name] = Ed25519Verify(trustedKey)
     }
 
-    fun build()= ManifestVerifier(trustedKeys.toMap())
+    fun build() = ManifestVerifier(trustedKeys.toMap())
   }
 }

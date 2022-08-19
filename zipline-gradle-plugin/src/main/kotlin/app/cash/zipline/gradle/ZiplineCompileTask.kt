@@ -94,9 +94,9 @@ abstract class ZiplineCompileTask : DefaultTask() {
 
       ZiplineCompiler.incrementalCompile(
         outputDir = outputDirFile,
-        modifiedFiles = filterByChangeType { changeType ->  changeType == ChangeType.MODIFIED },
-        addedFiles = filterByChangeType { changeType ->  changeType == ChangeType.ADDED },
-        removedFiles = filterByChangeType { changeType ->  changeType == ChangeType.REMOVED },
+        modifiedFiles = filterByChangeType { changeType -> changeType == ChangeType.MODIFIED },
+        addedFiles = filterByChangeType { changeType -> changeType == ChangeType.ADDED },
+        removedFiles = filterByChangeType { changeType -> changeType == ChangeType.REMOVED },
         mainFunction = mainFunction,
         mainModuleId = mainModuleId,
         manifestSigner = manifestSigner,
@@ -117,5 +117,5 @@ abstract class ZiplineCompileTask : DefaultTask() {
   data class ManifestSigningKey(
     val name: String,
     val privateKey: ByteString,
-  ): Serializable
+  ) : Serializable
 }

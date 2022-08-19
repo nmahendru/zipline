@@ -206,10 +206,13 @@ internal class BridgedInterface(
           callee = ziplineApis.serializerFunctionValueParam,
           type = ziplineApis.kSerializer.starProjectedType,
         ).apply {
-          putValueArgument(0, irCall(ziplineApis.listGetFunction).apply {
+          putValueArgument(
+            0,
+            irCall(ziplineApis.listGetFunction).apply {
             dispatchReceiver = irGet(typesExpression)
             putValueArgument(0, irInt(typeIndex))
-          })
+          }
+          )
           extensionReceiver = irGet(serializersModuleParameter)
         }
       }

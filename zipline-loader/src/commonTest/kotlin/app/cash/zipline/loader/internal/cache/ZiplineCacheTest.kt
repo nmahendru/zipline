@@ -367,7 +367,7 @@ class ZiplineCacheTest {
     val database = createDatabase(driver)
 
     val cache = ZiplineCache(
-      databaseCloseable = object: Closeable {
+      databaseCloseable = object : Closeable {
         override fun close() {
           driver.close()
         }
